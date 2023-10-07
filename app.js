@@ -30,3 +30,40 @@ function fibsRec(n) {
   
   console.log(fibsRec(8)); // [0, 1, 1, 2, 3, 5, 8, 13]
   
+
+  function mergeSort(array) {
+    if (array.length === 1) {
+      return array;
+    } else {
+      const leftHalf = array.slice(0,Math.floor(array.length/2));
+      const rightHalf = array.slice(Math.floor(array.length/2));
+      const firstHalf = mergeSort(leftHalf);
+      const secondHalf = mergeSort(rightHalf)
+      const sortedArray = [];
+      let i = 0;
+      let j = 0;
+      let k = 0;
+      while (i<firstHalf.length && j<secondHalf.length) {
+        if (firstHalf[i] < secondHalf[j]) {
+          sortedArray[k] = firstHalf[i++];
+          k++;
+        } else {
+          sortedArray[k] = secondHalf[j++];
+          k++;
+        }
+      };
+      for (;i<firstHalf.length;i++) {
+        sortedArray[k] = firstHalf[i];
+        k++
+      };
+      for (;j<secondHalf.length;j++) {
+        sortedArray[k] = secondHalf[j];
+        k++
+      };
+      //return [...mergeSort(firstHalf),...mergeSort(secondHalf)];
+      return sortedArray;
+    }
+  }
+console.log("hello");
+console.log(mergeSort([4,3,2,1]));
+console.log(mergeSort([5,4,3,2,1]));
